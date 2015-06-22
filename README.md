@@ -19,4 +19,3 @@ chrome-extension://*/
 
 Всё.
 
-Copyright (C) 2014 by Oleg Shirokov   olgshir@gmail.com
