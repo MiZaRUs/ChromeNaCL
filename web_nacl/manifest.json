@@ -1,0 +1,31 @@
+{
+  "name": "ChromeNaCL",
+  "version": "1.0",
+  "description": "Test Chrome NaCL",
+  "manifest_version": 2,
+  "icons": {
+    "48": "images/sm_gray.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "permissions": [
+    "notifications",
+    "background",
+    "nativeMessaging"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": [ "file:///*/test.html" ],
+      "js": [ "main.js" ],
+      "run_at": "document_start"
+    }
+  ]
+
+}
+
+

@@ -1,0 +1,9 @@
+{
+  "name": "com.my.exec",
+  "description": "App execute",
+  "path": "/home/oleg/ChromeNaCL/nacl_exec",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://*/"
+  ]
+}
