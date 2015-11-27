@@ -1,9 +1,0 @@
-{
-  "name": "com.my.ssh_cli",
-  "description": "App SSH Client",
-  "path": "/home/oleg/ChromeNaCL/nacl_ssh_cli",
-  "type": "stdio",
-  "allowed_origins": [
-    "chrome-extension://*/"
-  ]
-}

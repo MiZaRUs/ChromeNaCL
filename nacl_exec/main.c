@@ -1,12 +1,20 @@
-/*  Copyright (C) 2015 by Oleg Shirokov   olgshir@gmail.com   */
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 //====================================================================
+//--------------------------------------------------------------------
+//====================================================================
 int main( int argc, char *argv[] ){
+//    if( argc == 2 ){
+//        fprintf( pF,"arg1 %s.\n", argv[1] );
+//    }else{
+//	EXIT
+//    }
+//  --
     static size_t MAXBUF = 1024;
     char sbuf[ MAXBUF + 1 ];
+
 // получаем длинну сообщения
     size_t len = 0;
     size_t tmp0 = (size_t)getchar();
@@ -21,6 +29,10 @@ int main( int argc, char *argv[] ){
     len = len + tmp0;
 //  --
     if(( len < 7 ) || ( len > MAXBUF )) return 0;
+// открываем файл лога
+    FILE *pFlog = NULL;
+    pFlog = fopen ( "~/execute.log" , "a" );
+//  --
 // читаем сообщение
     size_t i;
     for( i = 0; i < len; i++ ){
@@ -29,7 +41,9 @@ int main( int argc, char *argv[] ){
     }
     sbuf[i] = '\0';
     sbuf[ len - 2 ] = 0;
-//  --
+// пишем в лог
+    if( pFlog != NULL ) fprintf( pFlog,"Exec:%s\n", sbuf+8 );
+
     if( system( sbuf + 8 ) == -1 ){
         sprintf( sbuf + 4, "\"Exec Error.\"" );
     }else{
@@ -47,7 +61,10 @@ int main( int argc, char *argv[] ){
     sbuf[3] = (char)(tmp0 & 0xff);
     len += 4;
     fwrite( sbuf, len, 1, stdout );
+//  --
+//    fwrite( sbuf, len, 1, pFlog );
 //--------------------------------------
+    if(pFlog )fclose ( pFlog );
 return 0;
 }
 //====================================================================

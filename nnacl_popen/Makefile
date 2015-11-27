@@ -1,5 +1,5 @@
 #
-PROG	=	nacl_ssh_cli
+PROG	=	nnacl_popen
 OBJS	=	main.o
 #
 CC 	=	gcc

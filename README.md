@@ -12,7 +12,7 @@
 выбрать web_nacl
 
 После установки расширения необходимо скопировать его ID и записать в файлы разрешений
-NativeMessagingHosts/com.my.exec.json и com.my.ssh_cli.json в место '*'
+NativeMessagingHosts/com.my.exec.json и com.my.popen.json в место '*'
 chrome-extension://*/
 поправить пути к предварительно скомпилированным бинарникам.
 Скопировать директорию в ~/.config/google-chrome*

@@ -1,0 +1,9 @@
+{
+  "name": "com.my.popen",
+  "description": "App popen",
+  "path": "/home/oleg/ChromeNaCL/nnacl_popen",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://*/",
+  ]
+}

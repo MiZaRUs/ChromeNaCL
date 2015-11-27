@@ -23,7 +23,7 @@ chrome.extension.onMessage.addListener(function(request, sender, func_callback) 
 //  --
     if (request.cmd == "SysLog"){	// получение основных сообщений из системного журнала винды по SSH по публичному ключу
         console.log("Ждём WinSysLog "+ request.h);
-        chrome.extension.sendNativeMessage('com.my.ssh_cli', { cmd: "user@"+request.h+" -i ~/.ssh/pub_rsa "+"psloglist /accepteula -i 19,41,109,6008,7000,7022,7038,1074 -d 2 | iconv -f CP1251 -t UTF-8" }, function( respon ){
+        chrome.extension.sendNativeMessage('com.my.popen', { cmd: "ssh user@"+request.h+" -i ~/.ssh/pub_rsa "+"psloglist /accepteula -i 19,41,109,6008,7000,7022,7038,1074 -d 2 | iconv -f CP1251 -t UTF-8" }, function( respon ){
             console.log('sendNativeMessage respon ',  respon);
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 chrome.tabs.sendMessage(tabs[0].id, {res: "ShowTXT", d: respon }, function(response) {  });
@@ -34,7 +34,7 @@ chrome.extension.onMessage.addListener(function(request, sender, func_callback) 
 //  --
     if (request.cmd == "GitStatus"){	// Получение подготовленного файла с отчетом git status по SSH по публичному ключу
         console.log("Ждём GitStatus "+ request.h);
-        chrome.extension.sendNativeMessage('com.my.ssh_cli', { cmd: "user@"+request.h+" -i ~/.ssh/pub_rsa "+"cat /cygdrive/d/imus/monitoring/SMonitor/log/git-status.log | iconv -f CP1251 -t UTF-8" }, function( respon ){
+        chrome.extension.sendNativeMessage('com.my.popen', { cmd: "ssh user@"+request.h+" -i ~/.ssh/pub_rsa "+"cat /cygdrive/d/imus/monitoring/SMonitor/log/git-status.log | iconv -f CP1251 -t UTF-8" }, function( respon ){
             console.log('sendNativeMessage respon ',  respon);
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 chrome.tabs.sendMessage(tabs[0].id, {res: "ShowTXT", d: respon }, function(response) {  });
@@ -47,7 +47,7 @@ chrome.extension.onMessage.addListener(function(request, sender, func_callback) 
     if (request.cmd == "QueuesAMQ"){	// Получение xml отчёта и преобразование в табличное представление
         console.log("Ждём QueuesAMQ "+ request.h +" : "+request.o);
         port = "8161";	// получаем с доп.параметрами
-        chrome.extension.sendNativeMessage('com.my.ssh_cli', { cmd: "user@"+request.h+" -i ~/.ssh/pub_rsa "+"curl http://localhost:"+port+"/admin/xml/queues.jsp" }, function( respon ){
+        chrome.extension.sendNativeMessage('com.my.popen', { cmd: "ssh user@"+request.h+" -i ~/.ssh/pub_rsa "+"curl http://localhost:"+port+"/admin/xml/queues.jsp" }, function( respon ){
             res = respon.replace(/<br>/g, "" );
             if( res.length > 20 ){
 // распарсим XML
